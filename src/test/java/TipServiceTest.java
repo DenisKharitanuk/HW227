@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TipServiceTest {
 
 
-    @ParameterizedTest
+    @ParameterizedTest( name =   "Amount {0}")
     @CsvSource({
             "0, 1.1",
             "1, 1.1",
