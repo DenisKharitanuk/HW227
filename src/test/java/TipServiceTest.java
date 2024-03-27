@@ -11,21 +11,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TipServiceTest {
 
 
-    @ParameterizedTest( name =   "Amount {0}")
+    @ParameterizedTest
     @CsvSource({
-            "0, 0",
-            "1,0.1",
-            "999, 99.9",
-            "1000,50.05",
-            "1001,50.05",
-            "-10,-1 ",
+            "0, 1.1",
+            "1, 1.1",
+            "999, 1.1",
+            "1000, 1.05",
+            "1001, 1.05",
+            "-10, 1.1",
     })
-    @DisplayName("Расчет чаевых при различной сумме заказа")
+    @DisplayName("Calculation of tips for different order amounts")
 
-    public void aroundTipsTest(BigDecimal amount, BigDecimal expected) {
+    public void aroundTipsTest(BigDecimal amount,BigDecimal percent) {
         TipService tipService = new TipService();
+        BigDecimal actual = tipService.roundTips(amount);
+        BigDecimal expected = amount.multiply(percent);
 
-        assertEquals(amount.multiply(amount), tipService.roundTips(amount));
+        assertEquals(actual, expected);
     }
 
 
